@@ -1,0 +1,125 @@
+---
+
+---
+
+<aside
+    class="hidden lg:block fixed right-0 top-0 h-full w-80 bg-[var(--color-surface)] border-l border-[var(--color-border)] p-6 z-40 overflow-y-auto"
+>
+    <div class="flex flex-col gap-8">
+        <!-- System Status Widget -->
+        <div class="terminal-card">
+            <div
+                class="text-[var(--color-text-muted)] text-xs uppercase tracking-wider mb-4 border-b border-[var(--color-border)] border-dashed pb-2"
+            >
+                [System Status]
+            </div>
+            <div class="space-y-4 font-mono text-xs">
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>CPU_LOAD</span>
+                        <span class="text-[var(--color-primary)]">12%</span>
+                    </div>
+                    <div
+                        class="w-full bg-[var(--color-background)] h-2 border border-[var(--color-border)]"
+                    >
+                        <div class="bg-[var(--color-primary)] h-full w-[12%]">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>MEM_USAGE</span>
+                        <span class="text-[var(--color-primary)]">48%</span>
+                    </div>
+                    <div
+                        class="w-full bg-[var(--color-background)] h-2 border border-[var(--color-border)]"
+                    >
+                        <div class="bg-[var(--color-primary)] h-full w-[48%]">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span>UPTIME</span>
+                        <span class="text-[var(--color-primary)]"
+                            >14d 03h 22m</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Network Status Widget -->
+        <div class="terminal-card">
+            <div
+                class="text-[var(--color-text-muted)] text-xs uppercase tracking-wider mb-4 border-b border-[var(--color-border)] border-dashed pb-2"
+            >
+                [Network]
+            </div>
+            <div class="space-y-2 font-mono text-xs">
+                <div class="flex items-center gap-2">
+                    <span
+                        class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+                    ></span>
+                    <span>STATUS: ONLINE</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>LATENCY</span>
+                    <span class="text-[var(--color-primary)]">24ms</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>PACKETS</span>
+                    <span class="text-[var(--color-primary)]">OK</span>
+                </div>
+                <div class="mt-4 text-[var(--color-text-muted)]">
+                    > ESTABLISHED CONNECTION<br />
+                    > SECURE PROTOCOL V2<br />
+                    > ENCRYPTION: AES-256
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Logs/Activity Widget -->
+        <div class="terminal-card">
+            <div
+                class="text-[var(--color-text-muted)] text-xs uppercase tracking-wider mb-4 border-b border-[var(--color-border)] border-dashed pb-2"
+            >
+                [Activity Log]
+            </div>
+            <div
+                class="space-y-3 font-mono text-xs text-[var(--color-text-muted)]"
+            >
+                <div class="flex gap-2">
+                    <span class="text-[var(--color-primary)]">10:42</span>
+                    <span>System initialization complete.</span>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[var(--color-primary)]">10:43</span>
+                    <span>Loading thought modules...</span>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[var(--color-primary)]">10:45</span>
+                    <span>Render engine ready.</span>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[var(--color-primary)]">11:01</span>
+                    <span>User session started.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative ASCII or Info -->
+        <div
+            class="text-[var(--color-text-muted)] text-[10px] leading-tight opacity-50 text-center mt-auto"
+        >
+            <pre>
+   _____
+  /     \
+ |  O O  |
+ |   ^   |
+  \_____/
+			</pre>
+            <div class="mt-2">TERMINAL V2.0</div>
+        </div>
+    </div>
+</aside>

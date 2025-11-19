@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
+import RightSidebar from "../components/RightSidebar.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
@@ -20,10 +21,11 @@ const thoughts = (await getCollection("thoughts")).sort(
 		class="bg-[var(--color-background)] text-[var(--color-text-main)] antialiased selection:bg-[var(--color-primary)] selection:text-black"
 	>
 		<Header />
+		<RightSidebar />
 		<main
-			class="max-w-3xl mx-auto px-4 py-8 relative md:ml-64 transition-all duration-300"
+			class="mx-auto px-4 py-8 relative md:ml-64 lg:mr-80 transition-all duration-300"
 		>
-			<section class="space-y-6 mt-16 md:mt-0">
+			<section class="space-y-6 mt-16 md:mt-0 max-w-4xl mx-auto">
 				{thoughts.map((thought) => <ThoughtCard thought={thought} />)}
 			</section>
 		</main>
