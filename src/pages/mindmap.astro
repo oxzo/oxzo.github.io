@@ -1,0 +1,73 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+import MindmapGraph from "../components/Mindmap";
+
+const thoughts = await getCollection("thoughts");
+
+// Process data for the mindmap
+const nodes: {
+    id: string;
+    group: "thought" | "tag";
+    val: number;
+    url?: string;
+}[] = [];
+const links: { source: string; target: string }[] = [];
+const tags = new Set<string>();
+
+// Create nodes for thoughts
+thoughts.forEach((thought) => {
+    nodes.push({
+        id: thought.data.title || thought.id, // Use title or ID as label
+        group: "thought",
+        val: 1,
+        url: `/thought/${thought.id}`,
+    });
+
+    // Collect tags and create links
+    if (thought.data.tags) {
+        thought.data.tags.forEach((tag) => {
+            tags.add(tag);
+            links.push({
+                source: tag,
+                target: thought.data.title || thought.id,
+            });
+        });
+    }
+});
+
+// Create nodes for tags
+tags.forEach((tag) => {
+    nodes.push({
+        id: tag,
+        group: "tag",
+        val: 2,
+    });
+});
+
+const graphData = { nodes, links };
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Mindmap - ${SITE_TITLE}`}
+            description={SITE_DESCRIPTION}
+        />
+    </head>
+    <body
+        class="bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500/30 selection:text-indigo-200"
+    >
+        <Header />
+        <main
+            class="flex-1 h-[calc(100vh-4rem)] w-full relative md:ml-64 transition-all duration-300 overflow-hidden"
+        >
+            <MindmapGraph client:only="react" data={graphData} />
+        </main>
+        <Footer />
+    </body>
+</html>

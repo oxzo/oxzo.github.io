@@ -1,0 +1,68 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+
+interface Props {
+	thought: CollectionEntry<"thoughts">;
+}
+
+const { thought } = Astro.props;
+const { Content } = await render(thought);
+
+const formattedDate = thought.data.pubDate.toLocaleDateString("en-us", {
+	year: "numeric",
+	month: "short",
+	day: "numeric",
+});
+---
+
+<article class="terminal-card mb-8 relative group">
+	<div class="relative z-10">
+		<div
+			class="flex justify-between items-start mb-4 border-b border-[var(--color-border)] pb-2 border-dashed"
+		>
+			<div class="text-sm text-[var(--color-text-muted)]">
+				@{thought.data.author || "oxzo"}
+			</div>
+			<div class="flex gap-4 text-sm text-[var(--color-text-muted)]">
+				<time datetime={thought.data.pubDate.toISOString()}>
+					{formattedDate}
+				</time>
+			</div>
+		</div>
+
+		<div
+			class="prose prose-invert max-w-none mb-6 prose-p:text-[var(--color-text-main)] prose-p:leading-relaxed prose-a:text-[var(--color-primary)] prose-headings:text-[var(--color-primary)] prose-headings:font-bold prose-code:text-[var(--color-primary)] prose-code:bg-[var(--color-surface)] prose-code:border prose-code:border-[var(--color-border)] prose-code:px-1"
+		>
+			<Content />
+		</div>
+
+		<div
+			class="flex justify-between items-center text-xs text-[var(--color-text-muted)] mt-4 pt-4 border-t border-[var(--color-border)] border-dashed"
+		>
+			<div class="flex gap-2">
+				{
+					thought.data.tags &&
+						thought.data.tags.map((tag) => (
+							<span class="px-2 py-0.5 border border-[var(--color-border)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-black transition-colors cursor-default">
+								#{tag}
+							</span>
+						))
+				}
+			</div>
+			<div class="flex items-center gap-4">
+				<span class="uppercase tracking-widest"
+					>[ <a
+						href={`/thought/${thought.id}`}
+						class="hover:text-[var(--color-primary)]">Open</a
+					> ]</span
+				>
+				<span class="uppercase tracking-widest"
+					>[ <button class="hover:text-[var(--color-primary)]"
+						>Save</button
+					> ]</span
+				>
+			</div>
+		</div>
+	</div>
+</article>
